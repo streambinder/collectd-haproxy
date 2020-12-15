@@ -209,6 +209,10 @@ class HAProxySocket(object):
                         aggregate[aggr_key][key_aggr_avg_label] = 0
 
                     aggregate[aggr_key][key_aggr_avg_label] = aggregate[aggr_key][key_aggr_avg_label] + 1
+                    # compute a progressive mean as we don't know
+                    # how many elements to do the calculation for apriori.
+                    # this way, at any step the calculation is computed,
+                    # it represents a perfectly valid mean.
                     aggregate[aggr_key][key] = ((val_left *
                                                  (aggregate[aggr_key][key_aggr_avg_label] - 1)) + int(val_right)) / aggregate[aggr_key][key_aggr_avg_label]
                 else:
