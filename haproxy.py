@@ -21,33 +21,113 @@ PLUGIN_NAME = 'haproxy'
 RECV_SIZE = 1024
 
 METRICS_TO_COLLECT = {
-    'ConnRate': 'gauge', 'CumReq': 'derive', 'Idle_pct': 'gauge', 'scur': 'gauge', 'SessRate': 'gauge',
-    'lbtot': 'counter', 'bout': 'derive', 'bin': 'derive', 'ttime': 'gauge', 'req_rate': 'gauge', 'rate': 'gauge',
-    'hrsp_2xx': 'derive', 'hrsp_4xx': 'derive', 'hrsp_5xx': 'derive', 'ereq': 'derive', 'dreq': 'derive',
-    'econ': 'derive', 'dresp': 'derive', 'qcur': 'gauge', 'qtime': 'gauge', 'rtime': 'gauge', 'eresp': 'derive',
-    'wretr': 'derive', 'wredis': 'derive', 'MaxConn': 'gauge', 'CumConns': 'derive', 'MaxConnRate': 'gauge',
-    'MaxSessRate': 'gauge', 'MaxSslConns': 'gauge', 'CumSslConns': 'derive', 'MaxPipes': 'gauge', 'Tasks': 'gauge',
-    'Run_queue': 'gauge', 'PipesUsed': 'gauge', 'PipesFree': 'gauge', 'Uptime_sec': 'derive', 'CurrConns': 'gauge',
-    'CurrSslConns': 'gauge', 'SslRate': 'gauge', 'SslFrontendKeyRate': 'gauge', 'SslBackendKeyRate': 'gauge',
-    'SslCacheLookups': 'derive', 'SslCacheMisses': 'derive', 'CompressBpsIn': 'derive', 'CompressBpsOut': 'derive',
-    'ZlibMemUsage': 'gauge', 'chkfail': 'derive', 'downtime': 'derive', 'hrsp_1xx': 'derive', 'hrsp_3xx': 'derive',
-    'hrsp_other': 'derive', 'qmax': 'gauge', 'qlimit': 'gauge', 'rate_lim': 'gauge', 'rate_max': 'gauge',
-    'req_rate_max': 'gauge', 'stot': 'derive', 'slim': 'gauge', 'smax': 'gauge', 'throttle': 'gauge',
-    'cli_abrt': 'derive', 'srv_abrt': 'derive', 'comp_in': 'derive', 'comp_out': 'derive', 'comp_byp': 'derive',
-    'comp_rsp': 'derive', 'ctime': 'gauge', 'act': 'gauge', 'bck': 'gauge', 'check_duration': 'gauge',
-    'lastsess': 'gauge', 'conn_rate': 'gauge', 'conn_rate_max': 'gauge', 'conn_tot': 'counter', 'intercepted': 'gauge',
-    'dcon': 'gauge', 'dses': 'gauge', 'sent': 'gauge', 'snd_error': 'gauge', 'valid': 'gauge', 'update': 'gauge',
-    'cname': 'gauge', 'cname_error': 'gauge', 'any_err': 'gauge', 'nx': 'gauge', 'timeout': 'gauge', 'refused': 'gauge',
-    'other': 'gauge', 'invalid': 'gauge', 'too_big': 'gauge', 'truncated': 'gauge', 'outdated': 'gauge'
+    'ConnRate': 'gauge',
+    'CumReq': 'derive',
+    'Idle_pct': 'gauge',
+    'scur': 'gauge',
+    'SessRate': 'gauge',
+    'lbtot': 'counter',
+    'bout': 'derive',
+    'bin': 'derive',
+    'ttime': 'gauge',
+    'req_rate': 'gauge',
+    'rate': 'gauge',
+    'hrsp_2xx': 'derive',
+    'hrsp_4xx': 'derive',
+    'hrsp_5xx': 'derive',
+    'ereq': 'derive',
+    'dreq': 'derive',
+    'econ': 'derive',
+    'dresp': 'derive',
+    'qcur': 'gauge',
+    'qtime': 'gauge',
+    'rtime': 'gauge',
+    'eresp': 'derive',
+    'wretr': 'derive',
+    'wredis': 'derive',
+    'MaxConn': 'gauge',
+    'CumConns': 'derive',
+    'MaxConnRate': 'gauge',
+    'MaxSessRate': 'gauge',
+    'MaxSslConns': 'gauge',
+    'CumSslConns': 'derive',
+    'MaxPipes': 'gauge',
+    'Tasks': 'gauge',
+    'Run_queue': 'gauge',
+    'PipesUsed': 'gauge',
+    'PipesFree': 'gauge',
+    'Uptime_sec': 'derive',
+    'CurrConns': 'gauge',
+    'CurrSslConns': 'gauge',
+    'SslRate': 'gauge',
+    'SslFrontendKeyRate': 'gauge',
+    'SslBackendKeyRate': 'gauge',
+    'SslCacheLookups': 'derive',
+    'SslCacheMisses': 'derive',
+    'CompressBpsIn': 'derive',
+    'CompressBpsOut': 'derive',
+    'ZlibMemUsage': 'gauge',
+    'chkfail': 'derive',
+    'downtime': 'derive',
+    'hrsp_1xx': 'derive',
+    'hrsp_3xx': 'derive',
+    'hrsp_other': 'derive',
+    'qmax': 'gauge',
+    'qlimit': 'gauge',
+    'rate_lim': 'gauge',
+    'rate_max': 'gauge',
+    'req_rate_max': 'gauge',
+    'stot': 'derive',
+    'slim': 'gauge',
+    'smax': 'gauge',
+    'throttle': 'gauge',
+    'cli_abrt': 'derive',
+    'srv_abrt': 'derive',
+    'comp_in': 'derive',
+    'comp_out': 'derive',
+    'comp_byp': 'derive',
+    'comp_rsp': 'derive',
+    'ctime': 'gauge',
+    'act': 'gauge',
+    'bck': 'gauge',
+    'check_duration': 'gauge',
+    'lastsess': 'gauge',
+    'conn_rate': 'gauge',
+    'conn_rate_max': 'gauge',
+    'conn_tot': 'counter',
+    'intercepted': 'gauge',
+    'dcon': 'gauge',
+    'dses': 'gauge',
+    'sent': 'gauge',
+    'snd_error': 'gauge',
+    'valid': 'gauge',
+    'update': 'gauge',
+    'cname': 'gauge',
+    'cname_error': 'gauge',
+    'any_err': 'gauge',
+    'nx': 'gauge',
+    'timeout': 'gauge',
+    'refused': 'gauge',
+    'other': 'gauge',
+    'invalid': 'gauge',
+    'too_big': 'gauge',
+    'truncated': 'gauge',
+    'outdated': 'gauge'
 }
 
 # svname, pxname, type are absolutely mandatory
 # here to keep the overall plugin flow working
 METRICS_AGGR_PULL = [
-    'svname', 'pxname', 'type'
+    'svname',
+    'pxname',
+    'type'
 ]
 METRICS_AGGR_SUM = [
-    'hrsp_2xx', 'hrsp_2xx', 'hrsp_3xx', 'hrsp_4xx', 'hrsp_5xx'
+    'hrsp_1xx',
+    'hrsp_2xx',
+    'hrsp_3xx',
+    'hrsp_4xx',
+    'hrsp_5xx'
 ]
 METRICS_AGGR_AVG = [
     'rtime'
@@ -99,10 +179,13 @@ class HAProxySocket(object):
 
         return outputs
 
-    # This method isn't nice but there's no other way to parse the output of show resolvers from haproxy
+    # this method isn't nice but there's no other way
+    # to parse the output of show resolvers from haproxy
     def get_resolvers(self):
         '''
-        Gets the resolver config and return s a map of nameserver -> nameservermetrics
+        Gets the resolver config and return s,
+        whish is a map of nameserver -> nameservermetrics.
+
         The output from the socket looks like
         Resolvers section mydns
          nameserver dns1:
@@ -159,7 +242,9 @@ class HAProxySocket(object):
         return result
 
     def get_server_info_proc_num(self, data):
-        for _, match in enumerate(re.finditer(r'Process_num: ([0-9]+)', data, re.MULTILINE), start=1):
+        for _, match in enumerate(
+                re.finditer(r'Process_num: ([0-9]+)', data, re.MULTILINE),
+                start=1):
             for groupNum in range(0, len(match.groups())):
                 groupNum = groupNum + 1
                 return match.group(groupNum).strip()
@@ -190,45 +275,39 @@ class HAProxySocket(object):
                 val_left = aggregate[aggr_key].get(key, 0)
                 val_right = stat.get(key, '0')
                 if key in METRICS_AGGR_PULL:
-                    # collectd.warning(
-                    #     "[{}] pulling in {}".format(aggr_key, key))
                     aggregate[aggr_key][key] = val_right
                 elif key in METRICS_AGGR_SUM:
-                    # collectd.warning(
-                    #     "[{}] summing {}".format(aggr_key, key))
                     if not val_right or not val_right.isdigit():
-                        # collectd.warning(
-                        #     "[{}] right value not suitable {}".format(aggr_key, val_right))
                         continue
                     aggregate[aggr_key][key] = val_left + int(val_right)
                 elif key in METRICS_AGGR_AVG:
-                    # collectd.warning(
-                    #     "[{}] averaging {}".format(aggr_key, key))
                     if not val_right or not val_right.isdigit():
-                        # collectd.warning(
-                        #     '[{}] right value not suitable "{}"'.format(aggr_key, val_right))
                         continue
                     key_aggr_avg_label = '{}_aggr_avg_cnt'.format(key)
                     if key_aggr_avg_label not in aggregate[aggr_key]:
                         aggregate[aggr_key][key_aggr_avg_label] = 0
 
-                    aggregate[aggr_key][key_aggr_avg_label] = aggregate[aggr_key][key_aggr_avg_label] + 1
+                    aggregate[aggr_key][key_aggr_avg_label] = \
+                        aggregate[aggr_key][key_aggr_avg_label] + 1
                     # compute a progressive mean as we don't know
                     # how many elements to do the calculation for apriori.
                     # this way, at any step the calculation is computed,
                     # it represents a perfectly valid mean.
-                    aggregate[aggr_key][key] = ((val_left *
-                                                 (aggregate[aggr_key][key_aggr_avg_label] - 1)) + int(val_right)) / aggregate[aggr_key][key_aggr_avg_label]
+                    next_avg_cnt = aggregate[aggr_key][key_aggr_avg_label]
+                    curr_avg_cnt = aggregate[aggr_key][key_aggr_avg_label] - 1
+                    aggregate[aggr_key][key] = \
+                        ((val_left * curr_avg_cnt) + int(val_right)) \
+                        / next_avg_cnt
                 else:
-                    # collectd.warning(
-                    #     "[{}] dropping {}".format(aggr_key, key))
                     pass
 
         return [val for key, val in aggregate.iteritems()]
 
     @staticmethod
     def _connect(payload):
-        if payload.startswith('file://') or payload.startswith('unix://') or payload.startswith('/'):
+        if payload.startswith('file://') \
+            or payload.startswith('unix://') \
+                or payload.startswith('/'):
             fname = payload.replace('file://', '').replace('unix://', '')
             sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
             sock.connect(fname)
@@ -248,7 +327,8 @@ class HAProxySocket(object):
 def get_stats(module_config):
     '''
         Makes two calls to haproxy to fetch server info and server stats.
-        Returns the dict containing metric name as the key and a tuple of metric value and the dict of dimensions if any
+        Returns the dict containing metric name as the key
+        and a tuple of metric value and the dict of dimensions if any.
     '''
     if 'sockets' not in module_config or len(module_config['sockets']) == 0:
         collectd.error(
@@ -264,7 +344,7 @@ def get_stats(module_config):
         resolver_stats = haproxy.get_resolvers()
     except socket.error as e:
         collectd.warning(
-            'status err Unable to connect to the HAProxy socket: {}'.format(str(e)))
+            'unable to connect to the HAProxy socket: {}'.format(str(e)))
         return stats
 
     # server wide stats
@@ -287,8 +367,10 @@ def get_stats(module_config):
     for resolver, resolver_stats in resolver_stats.iteritems():
         for metricname, val in resolver_stats.items():
             try:
-                stats.append(
-                    (metricname, int(val), {'is_resolver': True, 'nameserver': resolver}))
+                stats.append((metricname, int(val), {
+                    'is_resolver': True,
+                    'nameserver': resolver
+                }))
             except (TypeError, ValueError):
                 pass
 
@@ -296,9 +378,16 @@ def get_stats(module_config):
 
 
 def should_capture_metric(statdict, module_config):
-    return (('svname' in statdict and statdict['svname'].lower() in module_config['proxy_monitors']) or
-            ('pxname' in statdict and statdict['pxname'].lower() in module_config['proxy_monitors']) or
-            is_backend_server_metric(statdict) and 'backend' in module_config['proxy_monitors'])
+    return (
+        (
+            'svname' in statdict and
+            statdict['svname'].lower() in module_config['proxy_monitors']
+        ) or (
+            'pxname' in statdict and
+            statdict['pxname'].lower() in module_config['proxy_monitors']
+        ) or is_backend_server_metric(statdict) and
+        'backend' in module_config['proxy_monitors']
+    )
 
 
 def is_backend_server_metric(statdict):
@@ -311,7 +400,9 @@ def is_resolver_metric(statdict):
 
 def config(config_values):
     '''
-    A callback method that  loads information from the HaProxy collectd plugin config file.
+    A callback method that loads information
+    from the HaProxy collectd plugin config file.
+
     Args:
     config_values (collectd.Config): Object containing config values
     '''
@@ -374,11 +465,20 @@ def config(config_values):
 
 def _format_plugin_instance(dimensions):
     if is_backend_server_metric(dimensions):
-        return "{0}.{1}.{2}".format("backend", dimensions['pxname'].lower(), dimensions['svname'])
+        return "{0}.{1}.{2}".format(
+            "backend",
+            dimensions['pxname'].lower(),
+            dimensions['svname']
+        )
     elif is_resolver_metric(dimensions):
-        return "nameserver.{0}".format(dimensions['nameserver'])
+        return "nameserver.{0}".format(
+            dimensions['nameserver']
+        )
     else:
-        return "{0}.{1}".format(dimensions['svname'].lower(), dimensions['pxname'])
+        return "{0}.{1}".format(
+            dimensions['svname'].lower(),
+            dimensions['pxname']
+        )
 
 
 def _get_proxy_type(type_id):
@@ -405,7 +505,7 @@ def _str_to_bool(val):
         return True
     elif val != 'false':
         collectd.warning(
-            'Warning: String (%s) could not be converted to a boolean. Returning false.' % val)
+            '"%s" cannot be converted to a bool: returning false.' % val)
 
     return False
 
@@ -424,7 +524,8 @@ def submit_metrics(metric_datapoint):
 def collect_metrics(module_config):
     collectd.debug('beginning collect_metrics')
     '''
-        A callback method that gets metrics from HAProxy and records them to collectd.
+        A callback method that gets metrics from HAProxy
+        and records them to collectd.
     '''
 
     info = get_stats(module_config)
@@ -437,7 +538,7 @@ def collect_metrics(module_config):
         # assert metric is in valid metrics lists
         if metric_name not in METRICS_TO_COLLECT:
             collectd.debug(
-                "metric %s is not in list of metrics to collect" % metric_name.lower())
+                "metric %s is ignored" % metric_name.lower())
             continue
 
         metric_datapoint = {
