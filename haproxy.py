@@ -115,7 +115,7 @@ class HAProxySocket(object):
         '''
         result = {}
         sockets_stats = self.communicate('show resolvers')
-        nameserver = ''
+        nameserver = None
 
         for stats in sockets_stats:
             lines = stats.splitlines()
@@ -132,7 +132,7 @@ class HAProxySocket(object):
                         # remove trailing ':'
                         nameserver = unsanitied_nameserver[:-1]
                         result[nameserver] = {}
-                    else:
+                    elif nameserver:
                         key, val = line.split(':', 1)
                         current_nameserver_stats = result[nameserver]
                         current_nameserver_stats[key.strip()] = val.strip()
@@ -344,7 +344,7 @@ def config(config_values):
             collectd.warning('Unknown config key: %s' % node.key)
 
     if not sockets:
-        sockets += DEFAULT_SOCKET
+        sockets.append(DEFAULT_SOCKET)
     if not proxy_monitors:
         proxy_monitors += DEFAULT_PROXY_MONITORS
 
