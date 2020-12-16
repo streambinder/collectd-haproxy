@@ -1,11 +1,13 @@
 #!/usr/bin/env python
-import haproxy
+
 import collections
+import haproxy
+import sys
+
+from mock import call
 from mock import MagicMock
 from mock import Mock
 from mock import patch
-from mock import call
-import sys
 
 
 class MockCollectd(MagicMock):
