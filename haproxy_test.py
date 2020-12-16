@@ -3,7 +3,6 @@
 from __future__ import print_function
 
 import collections
-import haproxy
 import sys
 
 from mock import call
@@ -27,8 +26,8 @@ class MockCollectd(MagicMock):
     error = log
 
 
-class MockHAProxySocketSimple(object):
-    def __init__(self, socket_file="whatever"):
+class MockHAProxySocketSimple:
+    def __init__(self, socket_file=["whatever"]):
         self.socket_file = socket_file
 
     def get_resolvers(self):
@@ -49,25 +48,7 @@ class MockHAProxySocketSimple(object):
         return sample_data
 
 
-sys.modules['collectd'] = MockCollectd()
-
-
-ConfigOption = collections.namedtuple('ConfigOption', ('key', 'values'))
-
-mock_config_default_values = Mock()
-mock_config_default_values.children = [
-    ConfigOption('Testing', ('True',))
-]
-
-
-def test_default_config():
-    module_config = haproxy.config(mock_config_default_values)
-    assert module_config['socket'] == '/var/run/haproxy.sock'
-    assert module_config['proxy_monitors'] == ['server', 'frontend', 'backend']
-    assert module_config['testing']
-
-
-class MockHAProxySocketComplex(object):
+class MockHAProxySocketComplex:
     def __init__(self, socket_file="whatever"):
         self.socket_file = socket_file
 
@@ -135,6 +116,23 @@ class MockHAProxySocketComplex(object):
                         'hrsp_3xx': '', 'algo': None, 'act': '', 'chkdown': '', 'svname': 'FRONTEND',
                         'agent_fall': None}]
         return sample_data
+
+
+# don't move the block below
+sys.modules['collectd'] = MockCollectd()
+import haproxy
+ConfigOption = collections.namedtuple('ConfigOption', ('key', 'values'))
+mock_config_default_values = Mock()
+mock_config_default_values.children = [
+    ConfigOption('Testing', ('True',))
+]
+
+
+def test_default_config():
+    module_config = haproxy.config(mock_config_default_values)
+    assert module_config['sockets'] == ['/var/run/haproxy.sock']
+    assert module_config['proxy_monitors'] == ['server', 'frontend', 'backend']
+    assert module_config['testing']
 
 
 @patch('haproxy.HAProxySocket', MockHAProxySocketComplex)
@@ -383,7 +381,7 @@ def test_metrics_submitted_for_resolvers():
 
 def test_resolver_stats_can_be_parsed():
     haproxy_socket = haproxy.HAProxySocket(MagicMock())
-    haproxy_socket.communicate = MagicMock(return_value="""Resolvers section mydns
+    haproxy_socket.communicate = MagicMock(return_value=["""Resolvers section mydns
  nameserver dns1:
   sent:        8
   snd_error:   0
@@ -417,7 +415,7 @@ Resolvers section mydns2
   invalid:     0
   too_big:     0
   truncated:   0
-  outdated:    0""")
+  outdated:    0"""])
     assert haproxy_socket.get_resolvers() == \
         {
         'dns1': {'sent': '8', 'snd_error': '0', 'valid': '4', 'update': '0', 'cname': '0', 'cname_error': '4',
