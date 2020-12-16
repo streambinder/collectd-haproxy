@@ -301,7 +301,7 @@ class HAProxySocket(object):
                 else:
                     pass
 
-        return [val for key, val in aggregate.iteritems()]
+        return list(aggregate.keys())
 
     @staticmethod
     def _connect(payload):
@@ -348,7 +348,7 @@ def get_stats(module_config):
         return stats
 
     # server wide stats
-    for key, val in server_info.iteritems():
+    for key, val in server_info.items():
         try:
             stats.append((key, int(val), dict()))
         except (TypeError, ValueError):
@@ -364,7 +364,7 @@ def get_stats(module_config):
             except (TypeError, ValueError):
                 pass
 
-    for resolver, resolver_stats in resolver_stats.iteritems():
+    for resolver, resolver_stats in resolver_stats.items():
         for metricname, val in resolver_stats.items():
             try:
                 stats.append((metricname, int(val), {
