@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import collections
 import haproxy
 import sys
@@ -17,7 +19,7 @@ class MockCollectd(MagicMock):
 
     @staticmethod
     def log(log_str):
-        print log_str
+        print(log_str)
 
     debug = log
     info = log
