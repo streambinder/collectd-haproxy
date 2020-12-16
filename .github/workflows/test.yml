@@ -25,7 +25,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y collectd-python
+          sudo apt install -y collectd
 
       - name: Install Python dependencies
         run: |
