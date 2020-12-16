@@ -6,7 +6,11 @@
 # Plugin structure and logging func taken from
 # https://github.com/phrawzty/rabbitmq-collectd-plugin
 #
-# Modified by "Warren Turkal" <wt@signalfuse.com>, "Volodymyr Zhabiuk" <vzhabiuk@signalfx.com>
+# Modified by:
+# - "Warren Turkal" <wt@signalfuse.com>
+# - "Volodymyr Zhabiuk" <vzhabiuk@signalfx.com>
+# - "HM Revenue & Customs" <hmrc-web-operations@digital.hmrc.gov.uk>
+# - "Davide Pucci" <davide.pucci@immobiliare.it>
 
 import collectd
 import csv
