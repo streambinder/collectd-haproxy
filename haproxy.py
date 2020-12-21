@@ -387,7 +387,7 @@ class HAProxySocket(object):
                 else:
                     pass
 
-        return list(aggregate.keys())
+        return list(aggregate.values())
 
     @staticmethod
     def _connect(payload):
