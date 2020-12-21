@@ -379,11 +379,11 @@ class HAProxySocket(object):
                     # how many elements to do the calculation for apriori.
                     # this way, at any step the calculation is computed,
                     # it represents a perfectly valid mean.
-                    next_avg_cnt = aggregate[aggr_key][key_aggr_mean_label]
-                    curr_avg_cnt = aggregate[aggr_key][key_aggr_mean_label] - 1
+                    next_mean_cnt = aggregate[aggr_key][key_aggr_mean_label]
+                    curr_mean_cnt = aggregate[aggr_key][key_aggr_mean_label] - 1
                     aggregate[aggr_key][key] = \
-                        ((val_left * curr_avg_cnt) + int(val_right)) \
-                        / next_avg_cnt
+                        ((val_left * curr_mean_cnt) + int(val_right)) \
+                        / next_mean_cnt
                 else:
                     pass
 
