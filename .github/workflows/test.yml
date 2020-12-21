@@ -35,4 +35,4 @@ jobs:
 
       - name: Run codestyle check
         run: |
-          pycodestyle --max-line-length=120 *.py
+          pycodestyle *.py
