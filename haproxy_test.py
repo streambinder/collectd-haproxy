@@ -507,7 +507,7 @@ def test_metrics_submitted_for_frontend_with_correct_names():
             'type': 'gauge',
             'plugin': 'haproxy'
         })
-    ])
+    ], any_order=True)
 
 
 @patch('haproxy.HAProxySocket', MockHAProxySocketComplex)
@@ -870,7 +870,7 @@ def test_metrics_submitted_for_backend_and_server_with_correct_names():
             'type': 'gauge',
             'plugin': 'haproxy'
         })
-    ])
+    ], any_order=True)
 
 
 @patch('haproxy.HAProxySocket', MockHAProxySocketComplex)
@@ -1064,7 +1064,7 @@ def test_metrics_submitted_for_resolvers():
             'type': 'gauge',
             'plugin': 'haproxy'
         })
-    ])
+    ], any_order=True)
 
 
 def test_resolver_stats_can_be_parsed():
