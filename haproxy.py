@@ -21,105 +21,105 @@ PLUGIN_NAME = 'haproxy'
 RECV_SIZE = 1024
 
 METRICS_TO_COLLECT = {
+    'CompressBpsIn': 'derive',
+    'CompressBpsOut': 'derive',
     'ConnRate': 'gauge',
-    'CumReq': 'derive',
-    'Idle_pct': 'gauge',
-    'scur': 'gauge',
-    'SessRate': 'gauge',
-    'lbtot': 'counter',
-    'bout': 'derive',
-    'bin': 'derive',
-    'ttime': 'gauge',
-    'req_rate': 'gauge',
-    'rate': 'gauge',
-    'hrsp_2xx': 'derive',
-    'hrsp_4xx': 'derive',
-    'hrsp_5xx': 'derive',
-    'ereq': 'derive',
-    'dreq': 'derive',
-    'econ': 'derive',
-    'dresp': 'derive',
-    'qcur': 'gauge',
-    'qtime': 'gauge',
-    'rtime': 'gauge',
-    'eresp': 'derive',
-    'wretr': 'derive',
-    'wredis': 'derive',
-    'MaxConn': 'gauge',
     'CumConns': 'derive',
-    'MaxConnRate': 'gauge',
-    'MaxSessRate': 'gauge',
-    'MaxSslConns': 'gauge',
+    'CumReq': 'derive',
     'CumSslConns': 'derive',
-    'MaxPipes': 'gauge',
-    'Tasks': 'gauge',
-    'Run_queue': 'gauge',
-    'PipesUsed': 'gauge',
-    'PipesFree': 'gauge',
-    'Uptime_sec': 'derive',
     'CurrConns': 'gauge',
     'CurrSslConns': 'gauge',
-    'SslRate': 'gauge',
-    'SslFrontendKeyRate': 'gauge',
+    'Idle_pct': 'gauge',
+    'MaxConn': 'gauge',
+    'MaxConnRate': 'gauge',
+    'MaxPipes': 'gauge',
+    'MaxSessRate': 'gauge',
+    'MaxSslConns': 'gauge',
+    'PipesFree': 'gauge',
+    'PipesUsed': 'gauge',
+    'Run_queue': 'gauge',
+    'SessRate': 'gauge',
     'SslBackendKeyRate': 'gauge',
     'SslCacheLookups': 'derive',
     'SslCacheMisses': 'derive',
-    'CompressBpsIn': 'derive',
-    'CompressBpsOut': 'derive',
+    'SslFrontendKeyRate': 'gauge',
+    'SslRate': 'gauge',
+    'Tasks': 'gauge',
+    'Uptime_sec': 'derive',
     'ZlibMemUsage': 'gauge',
+    'act': 'gauge',
+    'any_err': 'gauge',
+    'bck': 'gauge',
+    'bin': 'derive',
+    'bout': 'derive',
+    'check_duration': 'gauge',
     'chkfail': 'derive',
-    'downtime': 'derive',
-    'hrsp_1xx': 'derive',
-    'hrsp_3xx': 'derive',
-    'hrsp_other': 'derive',
-    'qmax': 'gauge',
-    'qlimit': 'gauge',
-    'rate_lim': 'gauge',
-    'rate_max': 'gauge',
-    'req_rate_max': 'gauge',
-    'stot': 'derive',
-    'slim': 'gauge',
-    'smax': 'gauge',
-    'throttle': 'gauge',
     'cli_abrt': 'derive',
-    'srv_abrt': 'derive',
+    'cname': 'gauge',
+    'cname_error': 'gauge',
+    'comp_byp': 'derive',
     'comp_in': 'derive',
     'comp_out': 'derive',
-    'comp_byp': 'derive',
     'comp_rsp': 'derive',
-    'ctime': 'gauge',
-    'act': 'gauge',
-    'bck': 'gauge',
-    'check_duration': 'gauge',
-    'lastsess': 'gauge',
     'conn_rate': 'gauge',
     'conn_rate_max': 'gauge',
     'conn_tot': 'counter',
-    'intercepted': 'gauge',
+    'ctime': 'gauge',
     'dcon': 'gauge',
+    'downtime': 'derive',
+    'dreq': 'derive',
+    'dresp': 'derive',
     'dses': 'gauge',
-    'sent': 'gauge',
-    'snd_error': 'gauge',
-    'valid': 'gauge',
-    'update': 'gauge',
-    'cname': 'gauge',
-    'cname_error': 'gauge',
-    'any_err': 'gauge',
-    'nx': 'gauge',
-    'timeout': 'gauge',
-    'refused': 'gauge',
-    'other': 'gauge',
+    'econ': 'derive',
+    'ereq': 'derive',
+    'eresp': 'derive',
+    'hrsp_1xx': 'derive',
+    'hrsp_2xx': 'derive',
+    'hrsp_3xx': 'derive',
+    'hrsp_4xx': 'derive',
+    'hrsp_5xx': 'derive',
+    'hrsp_other': 'derive',
+    'intercepted': 'gauge',
     'invalid': 'gauge',
+    'lastsess': 'gauge',
+    'lbtot': 'counter',
+    'nx': 'gauge',
+    'other': 'gauge',
+    'outdated': 'gauge',
+    'qcur': 'gauge',
+    'qlimit': 'gauge',
+    'qmax': 'gauge',
+    'qtime': 'gauge',
+    'rate': 'gauge',
+    'rate_lim': 'gauge',
+    'rate_max': 'gauge',
+    'refused': 'gauge',
+    'req_rate': 'gauge',
+    'req_rate_max': 'gauge',
+    'rtime': 'gauge',
+    'scur': 'gauge',
+    'sent': 'gauge',
+    'slim': 'gauge',
+    'smax': 'gauge',
+    'snd_error': 'gauge',
+    'srv_abrt': 'derive',
+    'stot': 'derive',
+    'throttle': 'gauge',
+    'timeout': 'gauge',
     'too_big': 'gauge',
     'truncated': 'gauge',
-    'outdated': 'gauge'
+    'ttime': 'gauge',
+    'update': 'gauge',
+    'valid': 'gauge',
+    'wredis': 'derive',
+    'wretr': 'derive',
 }
 
 # svname, pxname, type are absolutely mandatory
 # here to keep the overall plugin flow working
 METRICS_AGGR_PULL = [
-    'svname',
     'pxname',
+    'svname',
     'type'
 ]
 METRICS_AGGR_SUM = [
@@ -129,7 +129,7 @@ METRICS_AGGR_SUM = [
     'hrsp_4xx',
     'hrsp_5xx'
 ]
-METRICS_AGGR_AVG = [
+METRICS_AGGR_MEAN = [
     'rtime'
 ]
 
@@ -280,21 +280,21 @@ class HAProxySocket(object):
                     if not val_right or not val_right.isdigit():
                         continue
                     aggregate[aggr_key][key] = val_left + int(val_right)
-                elif key in METRICS_AGGR_AVG:
+                elif key in METRICS_AGGR_MEAN:
                     if not val_right or not val_right.isdigit():
                         continue
-                    key_aggr_avg_label = '{}_aggr_avg_cnt'.format(key)
-                    if key_aggr_avg_label not in aggregate[aggr_key]:
-                        aggregate[aggr_key][key_aggr_avg_label] = 0
+                    key_aggr_mean_label = '{}_aggr_mean_cnt'.format(key)
+                    if key_aggr_mean_label not in aggregate[aggr_key]:
+                        aggregate[aggr_key][key_aggr_mean_label] = 0
 
-                    aggregate[aggr_key][key_aggr_avg_label] = \
-                        aggregate[aggr_key][key_aggr_avg_label] + 1
+                    aggregate[aggr_key][key_aggr_mean_label] = \
+                        aggregate[aggr_key][key_aggr_mean_label] + 1
                     # compute a progressive mean as we don't know
                     # how many elements to do the calculation for apriori.
                     # this way, at any step the calculation is computed,
                     # it represents a perfectly valid mean.
-                    next_avg_cnt = aggregate[aggr_key][key_aggr_avg_label]
-                    curr_avg_cnt = aggregate[aggr_key][key_aggr_avg_label] - 1
+                    next_avg_cnt = aggregate[aggr_key][key_aggr_mean_label]
+                    curr_avg_cnt = aggregate[aggr_key][key_aggr_mean_label] - 1
                     aggregate[aggr_key][key] = \
                         ((val_left * curr_avg_cnt) + int(val_right)) \
                         / next_avg_cnt
@@ -326,9 +326,9 @@ class HAProxySocket(object):
 
 def get_stats(module_config):
     '''
-        Makes two calls to haproxy to fetch server info and server stats.
-        Returns the dict containing metric name as the key
-        and a tuple of metric value and the dict of dimensions if any.
+    Makes two calls to haproxy to fetch server info and server stats.
+    Returns the dict containing metric name as the key
+    and a tuple of metric value and the dict of dimensions if any.
     '''
     if 'sockets' not in module_config or len(module_config['sockets']) == 0:
         collectd.error(
@@ -483,17 +483,14 @@ def _format_plugin_instance(dimensions):
 
 def _get_proxy_type(type_id):
     '''
-        Return human readable proxy type
-        Args:
-        type_id: 0=frontend, 1=backend, 2=server, 3=socket/listener
+    Return human readable proxy type
     '''
-    proxy_types = {
+    return {
         0: 'frontend',
         1: 'backend',
         2: 'server',
         3: 'socket/listener',
-    }
-    return proxy_types.get(int(type_id))
+    }.get(int(type_id))
 
 
 def _str_to_bool(val):
@@ -522,12 +519,12 @@ def submit_metrics(metric_datapoint):
 
 
 def collect_metrics(module_config):
-    collectd.debug('beginning collect_metrics')
     '''
-        A callback method that gets metrics from HAProxy
-        and records them to collectd.
+    A callback method that gets metrics from HAProxy
+    and records them to collectd.
     '''
 
+    collectd.debug('beginning collect_metrics')
     info = get_stats(module_config)
 
     if not info:
